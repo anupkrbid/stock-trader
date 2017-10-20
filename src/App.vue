@@ -1,14 +1,22 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <router-view/>
+    <app-header/>
+    <div class="row">
+      <div class="col-xs-12">
+        <router-view/>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app'
-}
+  import Header from './components/Header.vue'
+  export default {
+    components: {
+      appHeader: Header
+    }
+  }
 </script>
 
 <style>
@@ -19,5 +27,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  padding: 30px;
 }
 </style>

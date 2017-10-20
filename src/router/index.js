@@ -1,15 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+
+import Home from '../components/Home.vue'
+import Portfolio from '../components/portfolio/portfolio.vue'
+import Stocks from '../components/stocks/stocks.vue'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
-    {
-      path: '/',
-      name: 'Hello',
-      component: HelloWorld
-    }
+    { path: '/', name: 'Home', component: Home },
+    { path: '/stocks', name: 'Stocks', component: Stocks },
+    { path: '/portfolio', name: 'Portfolio', component: Portfolio }
   ]
 })
