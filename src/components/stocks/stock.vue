@@ -5,15 +5,23 @@
                 <h3 class="panel-title">
                     {{ stock.name }}
                 </h3>
-                <small>( Price: {{ stock.price }} )</small>
+                <small>( Price: {{ stock.price | currency }} )</small>
             </div>
             <div class="panel-body">
                 <div class="pull-left">
-                    <input class="form-control" v-model="quantity" type="number" placeholder="Quantity">
+                    <input class="form-control"
+                           :class="{danger: insufficientFunds}"
+                           v-model="quantity"
+                           type="number"
+                           placeholder="Quantity"
+                    >
                 </div>
                 <div class="pull-right">
-                    <button class="btn btn-success" @click="buyStock">
-                        Buy
+                    <button class="btn btn-success"
+                            @click="buyStock"
+                            :disabled="insufficientFunds || quantity <=0"
+                    >
+                        {{ insufficientFunds ? 'Insufficient Funds' : 'Buy' }}
                     </button>
                 </div>
             </div>
@@ -21,12 +29,26 @@
     </div>
 </template>
 
+<style scoped>
+    .danger {
+        border: 1px solid crimson;
+    }
+</style>
+
 <script>
     export default {
       props: ['stock'],
       data () {
         return {
           quantity: 0
+        }
+      },
+      computed: {
+        funds () {
+          return this.$store.getters.funds
+        },
+        insufficientFunds () {
+          return this.quantity * this.stock.price > this.funds
         }
       },
       methods: {
