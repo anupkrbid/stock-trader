@@ -17,7 +17,7 @@
                     >
                 </div>
                 <div class="pull-right">
-                    <button class="btn btn-success"
+                    <button class="btn btn-info"
                             @click="sellStock"
                             :disabled="insufficientQuantity || quantity <=0"
                     >
